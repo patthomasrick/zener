@@ -9,3 +9,11 @@ services:
     volumes:
       # Create this.
       - ./config.ini:/usr/src/app/config.ini
+
+  # Uncomment and point towards your dialo repo.
+  dialo:
+    build:
+      context: /home/thomas/development/godel
+      dockerfile: docker/Dockerfile
+    volumes:
+      - /app/data

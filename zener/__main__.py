@@ -3,8 +3,9 @@ import logging
 import discord
 from discord.ext import commands
 
-from zener.commands.youtube.register import register as register_youtube
+from zener.commands.dialo.register import register as register_dialo
 from zener.commands.util.register import register as register_util
+from zener.commands.youtube.register import register as register_youtube
 from zener.config import Config
 
 logging.basicConfig(level=logging.INFO)
@@ -21,9 +22,7 @@ class ZenerBot(commands.Bot):
         intents.integrations = True
         intents.message_content = True
 
-        super().__init__(
-            command_prefix=commands.when_mentioned_or("!"), intents=intents
-        )
+        super().__init__(command_prefix="!", intents=intents)
 
 
 if __name__ == "__main__":
@@ -59,6 +58,7 @@ if __name__ == "__main__":
         logging.info("Registering commands.")
         await register_youtube(client)
         await register_util(client)
+        await register_dialo(client)
 
         # Sync commands on guilds.
         logging.info("Syncing commands on guilds.")

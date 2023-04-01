@@ -26,9 +26,7 @@ class Confirm(discord.ui.View):
 
     # This one is similar to the confirmation button except sets the inner value to `False`
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.grey)
-    async def cancel(
-        self, interaction: discord.Interaction, button: discord.ui.Button
-    ):
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
         logging.info("Cancel button pressed.")
         self.state = False
         self.stop()
@@ -52,9 +50,7 @@ class Rm(commands.Cog):
             interaction (discord.Interaction): Interaction.
             pattern (str): Pattern to match against.
         """
-        logging.info(
-            f"Searching for messages with text '{pattern}' for deletion."
-        )
+        logging.info(f"Searching for messages with text '{pattern}' for deletion.")
 
         # Get the sender's text channel.
         channel = interaction.channel
@@ -135,9 +131,7 @@ class Rm(commands.Cog):
                 return True
         return False
 
-    async def confirm_delete(
-        self, interaction: discord.Interaction, to_delete: list
-    ):
+    async def confirm_delete(self, interaction: discord.Interaction, to_delete: list):
         # We create the view and assign it to a variable so we can wait for it later.
         view = Confirm()
         await interaction.response.send_message(

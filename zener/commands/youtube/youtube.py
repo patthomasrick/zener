@@ -90,9 +90,7 @@ class YouTubeCommand(commands.Cog):
     async def yt(self, interaction: discord.Interaction, url: str) -> None:
         await self._youtube(interaction, url)
 
-    async def _youtube(
-        self, interaction: discord.Interaction, url: str
-    ) -> None:
+    async def _youtube(self, interaction: discord.Interaction, url: str) -> None:
         """Leave a voice channel."""
         if not interaction.guild:
             await interaction.response.send_message(
@@ -134,9 +132,7 @@ class YouTubeCommand(commands.Cog):
 
         # Play the audio.
         vc = interaction.guild.voice_client
-        player = await YTDLSource.from_url(
-            url, loop=self.bot.loop, stream=False
-        )
+        player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=False)
         vc.play(
             player,
             after=lambda e: print(f"Player error: {e}") if e else None,

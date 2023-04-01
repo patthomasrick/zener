@@ -11,9 +11,7 @@ class LeaveCommand(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
-    @app_commands.command(
-        name="leave", description="Leave the current voice channel."
-    )
+    @app_commands.command(name="leave", description="Leave the current voice channel.")
     async def leave(self, interaction: discord.Interaction) -> None:
         """Leave a voice channel."""
         if not interaction.guild:

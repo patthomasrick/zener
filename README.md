@@ -25,7 +25,14 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-Save your bot token to `secret.txt`. Contents should just be the token itself on the first line. Newline doesn't matter.
+Create `config.ini` and fill in the values:
+
+```ini
+[DISCORD]
+secret = secret.token.here
+application_id = 001122334455667788
+command_mode = guild
+```
 
 Launch:
 

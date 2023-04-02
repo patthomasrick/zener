@@ -19,6 +19,14 @@ async def chat_listener(message: Message) -> None:
 
     logging.info(f"Received message: {message.content}")
 
+    # Replace mentions with the bot's name.
+    for mention in message.mentions:
+        message.content = message.content.replace(mention.mention, mention.name)
+
+    # If the message just starts with the bot's name, remove it.
+    if message.content.startswith(message.guild.me.name):
+        message.content = message.content[len(message.guild.me.name) :].strip()
+
     # Send a POST request to dialo:5000 with data user_input=message
     request = requests.post("http://dialo:5000", data={"user_input": message.content})
     if request.status_code != 200:
@@ -31,7 +39,7 @@ async def chat_listener(message: Message) -> None:
         reply = "ERROR: No response from dialo."
 
     if reply.startswith("ERROR:"):
-        logging.error(f"Error from dialo: {reply}")
+        logging.error(f"Error from dialo: {request.text}")
 
     logging.info(f"Sending reply: {reply}")
     await message.reply(reply)
